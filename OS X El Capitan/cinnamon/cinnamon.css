@@ -354,12 +354,14 @@ StScrollBar StButton#vhandle:hover {
 }
 
 .panel-status-button:hover {
-    color: #F9F9F9;
+    /*color: #F9F9F9;*/
+    color: black;
     border-image: url("applet-box.png") 6;
 }
 
 .panel-status-button:active {
-    color: #F9F9F9;
+    /*color: #F9F9F9;*/
+    color: black;
     background-color: rgba(45,45,45,0);
 }
 
@@ -403,10 +405,20 @@ StScrollBar StButton#vhandle:hover {
     background-color: rgba(45,45,45,1);
 }
 
-.panel-button:active > .system-status-icon,
+/*.panel-button:active > .system-status-icon,
 .panel-button:checked > .system-status-icon,
-.panel-button:focus > .system-status-icon {
+.panel-button:focus > .system-status-icon,
+.panel-button:overview > .system-status_icon {
     icon-shadow: rgba(0,0,0,0) 0px 2px 2px;
+    color: black;
+}*/
+
+.panel-button:active  .system-status-icon,
+.panel-button:checked  .system-status-icon,
+.panel-button:focus  .system-status-icon,
+.panel-button:overview  .system-status_icon {
+    icon-shadow: rgba(0,0,0,0) 0px 2px 2px;
+    color: black;
 }
 
 .panel-menu {
@@ -418,6 +430,13 @@ StScrollBar StButton#vhandle:hover {
 
 .system-status-icon {
     icon-size: 1.14em;
+    color: #F9F9F9;
+}
+
+.system-status-icon:hover,
+.system-status-icon:active,
+.system-status-icon:focus {
+    color: black;
 }
 
 /* ===================================================================
@@ -824,6 +843,7 @@ StScrollBar StButton#vhandle:hover {
 	height: 280px;
 	spacing-rows: 6px;
 	spacing-columns: 6px;
+    color: #F9F9F9;
 }
 
 .datemenu-date-label {
@@ -2129,12 +2149,14 @@ StScrollBar StButton#vhandle:hover {
 }
 
 .applet-box {
+    color: #F9F9F9;
     padding-left: 4px;
     padding-right: 4px;
 }
 
 .applet-box:hover {
     border-image: url("applet-box.png") 6 6 6 6 stretch;
+    color: black;
 }
 
 .applet-box:active {
@@ -2145,13 +2167,15 @@ StScrollBar StButton#vhandle:hover {
 }
 
 .applet-icon {
-    color: #F9F9F9;
+    /*color: #F9F9F9;*/
+    color:red;
     icon-size: 22px;
 }
 
 .applet-icon:hover,
 .applet-box:hover > .applet-icon {
-    color: #F9F9F9;
+    /*color: #F9F9F9;*/
+    color: black;
  }
 
 /* ===================================================================

@@ -660,7 +660,7 @@ StScrollBar {
 
 #panelActivities * {
 	border:none;
-/*	background-image: url("assets/view-grid-symbolic.svg");*/
+	background-image: url("assets/view-grid-symbolic.svg");
 	background-size: 20px 20px;
 	background-position: 0 0;
 	margin: 0px;
