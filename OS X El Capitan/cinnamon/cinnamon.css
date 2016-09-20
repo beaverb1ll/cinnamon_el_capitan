@@ -2173,7 +2173,8 @@ StScrollBar StButton#vhandle:hover {
 }
 
 .applet-icon:hover,
-.applet-box:hover > .applet-icon {
+.applet-box:hover > .applet-icon,
+.applet-box:hover .system-status-icon {
     /*color: #F9F9F9;*/
     color: black;
  }
