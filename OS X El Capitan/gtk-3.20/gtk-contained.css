@@ -537,7 +537,7 @@ button {
     outline-color: rgba(46, 52, 54, 0.3);
     border-color: transparent;
     background-image: none;
-    background-color: transparent;  /* transparent button for titlebar action buttons */
+    background-color: @selected_bg_color;
     box-shadow: none;
     text-shadow: none;
     -gtk-icon-shadow: none;
@@ -2569,195 +2569,398 @@ popover.background {
 /*************
  * Notebooks *
  *************/
-notebook > header {
-  padding: 1px;
-  border-color: @borders;
-  border-width: 1px;
-  background-color: transparent; }
-  notebook > header:backdrop {
-    border-color: shade(@borders, 0.95);
-    background-color: transparent; }
-  notebook > header tabs {
-    margin: -1px;
-    padding: 2px 0;
-    background-color: shade(@theme_bg_color, 0.95);}
-  notebook > header.top {
-    border-bottom-style: solid; }
-    notebook > header.top > tabs {
-      margin-bottom: -2px; }
-      notebook > header.top > tabs > tab:hover {
-        background-color: shade(@theme_bg_color, 0.97); }
-      notebook > header.top > tabs > tab:backdrop {
-        box-shadow: none; }
-      notebook > header.top > tabs > tab:checked {
-        background-image: linear-gradient(to bottom, shade(@theme_selected_bg_color, 1.1), shade(@theme_selected_bg_color, 0.9));
-	color: @theme_selected_fg_color; }
-  notebook > header.bottom {
-    border-top-style: solid; }
-    notebook > header.bottom > tabs {
-      margin-top: -2px;
-      background-color: shade(@theme_bg_color, 0.95); }
-      notebook > header.bottom > tabs > tab:hover {
-      background-color: shade(@theme_bg_color, 0.97); }
-      notebook > header.bottom > tabs > tab:backdrop {
-        box-shadow: none; }
-      notebook > header.bottom > tabs > tab:checked {
-        background-image: linear-gradient(to bottom, shade(@theme_selected_bg_color, 1.1), shade(@theme_selected_bg_color, 0.9));
-	color: @theme_selected_fg_color; }
-  notebook > header.left {
-    border-right-style: solid; }
-    notebook > header.left > tabs {
-      margin-right: -2px;
-      background-color: shade(@theme_bg_color, 0.95);}
-      notebook > header.left > tabs > tab:hover {
-      background-color: shade(@theme_bg_color, 0.97); }
-      notebook > header.left > tabs > tab:backdrop {
-        box-shadow: none; }
-      notebook > header.left > tabs > tab:checked {
-        background-image: linear-gradient(to right, shade(@theme_selected_bg_color, 1.1), shade(@theme_selected_bg_color, 0.9));
-	color: @theme_selected_fg_color; }
-  notebook > header.right {
-    border-left-style: solid; }
-    notebook > header.right > tabs {
-      margin-left: -2px;
-      background-color: shade(@theme_bg_color, 0.95);}
-      notebook > header.right > tabs > tab:hover {
-      background-color: shade(@theme_bg_color, 0.97); }
-      notebook > header.right > tabs > tab:backdrop {
-        box-shadow: none; }
-      notebook > header.right > tabs > tab:checked {
-        background-image: linear-gradient(to left, shade(@theme_selected_bg_color, 1.1), shade(@theme_selected_bg_color, 0.9));
-	color: @theme_selected_fg_color; }
-  notebook > header.top > tabs > arrow {
-    border-top-style: none; }
-  notebook > header.bottom > tabs > arrow {
-    border-bottom-style: none; }
-  notebook > header.top > tabs > arrow, notebook > header.bottom > tabs > arrow {
-    margin-left: -5px;
-    margin-right: -5px;
-    padding-left: 4px;
-    padding-right: 4px; }
-    notebook > header.top > tabs > arrow.down, notebook > header.bottom > tabs > arrow.down {
-      -gtk-icon-source: -gtk-icontheme("pan-start-symbolic"); }
-    notebook > header.top > tabs > arrow.up, notebook > header.bottom > tabs > arrow.up {
-      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic"); }
-  notebook > header.left > tabs > arrow {
-    border-left-style: none; }
-  notebook > header.right > tabs > arrow {
-    border-right-style: none; }
-  notebook > header.left > tabs > arrow, notebook > header.right > tabs > arrow {
-    margin-top: -5px;
-    margin-bottom: -5px;
-    padding-top: 4px;
-    padding-bottom: 4px; }
-    notebook > header.left > tabs > arrow.down, notebook > header.right > tabs > arrow.down {
-      -gtk-icon-source: -gtk-icontheme("pan-up-symbolic"); }
-    notebook > header.left > tabs > arrow.up, notebook > header.right > tabs > arrow.up {
-      -gtk-icon-source: -gtk-icontheme("pan-down-symbolic"); }
-  notebook > header > tabs > arrow {
-    min-height: 16px;
-    min-width: 16px;
-    border-radius: 0; }
-    notebook > header > tabs > arrow:hover:not(:active):not(:backdrop) {
-      background-clip: padding-box;
-      background-image: none;
-      background-color: rgba(255, 255, 255, 0.3);
-      border-color: transparent;
-      box-shadow: none; }
-    notebook > header > tabs > arrow:disabled {
-      border-color: transparent;
-      background-color: transparent;
-      background-image: none;
-      box-shadow: inset 0 1px rgba(255, 255, 255, 0);
-      text-shadow: none;
-      -gtk-icon-shadow: none; }
+/*****************
+ * Notebooks and *
+ * tabs          *
+ *****************/
 
-  notebook > header tab {
-    min-height: 15px;
-    min-width: 30px;
-    padding: 2px 8px;
-    outline-offset: -5px;
-    color: @insensitive_fg_color;
-    font-weight: bold;
+notebook {
+    padding: 0;
+    background-clip: border-box;
+    border-style: none;
+}
+
+notebook.frame {
+    background-color: shade (@theme_bg_color, 1.1);
+    border-style: solid;
+    border-color: @borders;
     border-width: 1px;
-    border-radius: 6px;
-    border-color: transparent; }
-    notebook > header tab:hover {
-      color: @theme_fg_color; }
-      notebook > header tab:hover.reorderable-page {
-        border-color: rgba(182, 182, 179, 0.3);
-        background-color: rgba(232, 232, 231, 0.2); }
-    notebook > header tab:backdrop {
-      color: @theme_unfocused_fg_color; }
-      notebook > header tab:backdrop.reorderable-page {
-        border-color: transparent;
-        background-color: transparent; }
-    notebook > header tab:checked {
-      color: @theme_selected_fg_color; }
-      notebook > header tab:checked.reorderable-page {
-        border-color: rgba(182, 182, 179, 0.5);
-        background-color: rgba(232, 232, 231, 0.5); }
-        notebook > header tab:checked.reorderable-page:hover {
-          background-color: rgba(232, 232, 231, 0.7); }
-    notebook > header tab:backdrop:checked {
-      color: @theme_selected_fg_color; }
-      notebook > header tab:backdrop:checked.reorderable-page {
-        border-color: shade(@borders, 0.95);
-        background-color: @theme_bg_color; }
-    notebook > header tab button.flat {
-      padding: 0;
-      margin-top: 4px;
-      margin-bottom: 4px;
-      min-width: 20px;
-      min-height: 20px; }
-      notebook > header tab button.flat:hover {
-        color: currentColor; }
-      notebook > header tab button.flat, notebook > header tab button.flat:backdrop {
-        color: alpha(currentColor,0.3); }
-      notebook > header tab button.flat:last-child {
-        margin-left: 4px;
-        margin-right: -4px; }
-      notebook > header tab button.flat:first-child {
-        margin-left: -4px;
-        margin-right: 4px; }
-  notebook > header.top tabs, notebook > header.bottom tabs {
-    padding-left: 4px;
-    padding-right: 4px; }
-    notebook > header.top tabs:not(:only-child), notebook > header.bottom tabs:not(:only-child) {
-      margin-left: 3px;
-      margin-right: 3px; }
-      notebook > header.top tabs:not(:only-child):first-child, notebook > header.bottom tabs:not(:only-child):first-child {
-        margin-left: -1px; }
-      notebook > header.top tabs:not(:only-child):last-child, notebook > header.bottom tabs:not(:only-child):last-child {
-        margin-right: -1px; }
-    notebook > header.top tabs tab, notebook > header.bottom tabs tab {
-      margin-left: 4px;
-      margin-right: 4px; }
-      notebook > header.top tabs tab.reorderable-page, notebook > header.bottom tabs tab.reorderable-page {
-        border-style: none solid; }
-  notebook > header.left tabs, notebook > header.right tabs {
-    padding-top: 4px;
-    padding-bottom: 4px; }
-    notebook > header.left tabs:not(:only-child), notebook > header.right tabs:not(:only-child) {
-      margin-top: 3px;
-      margin-bottom: 3px; }
-      notebook > header.left tabs:not(:only-child):first-child, notebook > header.right tabs:not(:only-child):first-child {
-        margin-top: -1px; }
-      notebook > header.left tabs:not(:only-child):last-child, notebook > header.right tabs:not(:only-child):last-child {
-        margin-bottom: -1px; }
-    notebook > header.left tabs tab, notebook > header.right tabs tab {
-      margin-top: 4px;
-      margin-bottom: 4px; }
-      notebook > header.left tabs tab.reorderable-page, notebook > header.right tabs tab.reorderable-page {
-        border-style: solid none; }
-  notebook > header.top tab {
-    padding-bottom: 4px; }
-  notebook > header.bottom tab {
-    padding-top: 4px; }
-notebook > stack:not(:only-child) {
-  background-color: @theme_bg_color; }
-  notebook > stack:not(:only-child):backdrop {
-    background-color: @theme_unfocused_bg_color; }
+    border-radius: 4px 4px 0px 0px;
+}
+
+/* pavu-control */
+window.background > box.vertical > notebook:not(.frame),
+window.background.csd > box.vertical > notebook:not(.frame),
+window.background.ssd > box.vertical > notebook:not(.frame),
+window.background.solid-csd > box.vertical > notebook:not(.frame) {
+    background-color: shade (@theme_bg_color, 1.1);
+    border-radius: 4px 4px 0px 0px;
+}
+
+printdialog > box.view.vertical.dialog-vbox > box.vertical > notebook {
+    background-color: shade (@theme_bg_color, 1.1);
+    border-radius: 0px;
+    border-style: solid;
+    border-color: @borders;
+    border-width: 0px 0px 1px 0px;
+}
+
+dialog.background.csd > box.vertical.dialog-vbox > notebook, /* meld preferences */
+dialog.background.ssd > box.vertical.dialog-vbox > notebook,
+dialog.background.solid-csd > box.vertical.dialog-vbox > notebook {
+    background-color: shade (@theme_bg_color, 1.1);
+}
+
+notebook :hover {
+    -gtk-icon-effect: highlight;
+    color: @theme_fg_color;
+}
+
+notebook header {
+    background-image: linear-gradient(to bottom,
+                                      shade(@theme_bg_color, 0.96),
+                                      shade(@theme_bg_color, 1.0));
+}
+
+notebook header.top {
+    border-width: 0px 1px 1px 1px;
+    border-radius: 4px 4px 0px 0px;
+    box-shadow: inset  0px  1px 0 0 alpha(@borders, 0.4),
+                inset  0px -1px 0 0 alpha(@borders, 0.4);
+}
+
+printdialog notebook header.top,
+dialog.background.csd > box.vertical.dialog-vbox > notebook > header.top,
+dialog.background.ssd > box.vertical.dialog-vbox > notebook > header.top,
+dialog.background.solid-csd > box.vertical.dialog-vbox > notebook > header.top {
+    border-radius: 0px;
+}
+
+notebook header.bottom {
+    border-width: 1px 1px 0px 1px;
+    border-radius: 0px;
+    box-shadow: inset  0px  1px 0 0 alpha(@borders, 0.4),
+                inset  0px -1px 0 0 alpha(@borders, 0.4);
+}
+
+notebook header.left {
+    border-width: 1px 1px 1px 0px;
+    border-radius: 4px 0px 0px 0px;
+    box-shadow: inset  1px  0px alpha(@borders, 0.4),
+                inset -1px  0px alpha(@borders, 0.4);
+}
+
+notebook header.right {
+    border-width: 1px 0px 1px 1px;
+    border-radius: 0px 4px 0px 0px;
+    box-shadow: inset  1px  0px alpha(@borders, 0.4),
+                inset -1px  0px alpha(@borders, 0.4);
+}
+
+notebook viewport.view {
+    background-color: @theme_base_color;
+    border-width: 0px;
+}
+
+notebook header .prelight-page,
+notebook header .prelight-page label {
+    color: mix (@theme_fg_color, @theme_bg_color, 0.15);
+}
+
+notebook header .active-page,
+notebook header tab .active-page label {
+    color: @theme_fg_color;
+}
+
+notebook header tab {
+    border-color: transparent;
+    border-width: 0px;
+    background-image: none;
+    background-color: transparent;
+}
+
+notebook header tab label {
+    color: mix (@theme_fg_color, @theme_bg_color, 0.40);
+    font-weight: normal;
+}
+
+/* notebooks, view, header and tabs in caja and pluma view */
+paned.horizontal notebook {
+    border-style: none;
+    border-color: @borders;
+    border-width: 0px;
+    border-radius: 4px 4px 0px 0px;
+}
+
+paned.horizontal notebook box.vertical {
+    border-radius: 0px;
+    border-width: 0px;
+    border-style: none;
+}
+
+paned.horizontal notebook header.top {
+    border-radius: 4px 4px 0px 0px;
+    border-style: solid;
+    border-color: @borders;
+    border-width: 1px 1px 1px 1px;
+    box-shadow: none;
+}
+
+paned.horizontal notebook scrolledwindow.frame {
+    border-width: 0px 1px 1px 1px;
+}
+
+paned.horizontal notebook header.top tab {
+    padding: 2px 4px;
+    margin: 0px 0px 0px -1px;
+    border-style: solid;
+    border-width: 0px 1px 0px 1px;
+    border-color: @borders;
+    border-radius: 4px 4px 0px 0px;
+}
+
+/* tabs ie. preferences windows */
+/* horizontal tabs */
+window.background > box.vertical > notebook > header.top tab, /* pavu-control */
+window.background.csd > box.vertical > notebook > header.top tab,
+window.background.ssd > box.vertical > notebook > header.top tab,
+window.background.solid-csd > box.vertical > notebook > header.top tab,
+dialog.background.csd > box.vertical.dialog-vbox > notebook > header.top tab, /* meld preferences */
+dialog.background.ssd > box.vertical.dialog-vbox > notebook > header.top tab,
+dialog.background.solid-csd > box.vertical.dialog-vbox > notebook > header.top tab,
+printdialog notebook > header.top tab,
+notebook.frame header.top tab,
+notebook.frame header.bottom tab {
+    padding: 6px 21px 4px;
+    margin: 0px 0px 0px -1px;
+    border-style: solid;
+    border-width: 0px 1px 0px 1px;
+    border-radius: 4px 4px 0px 0px;
+    border-color: @borders;
+}
+
+window.background > box.vertical > notebook > header.top tab, /* pavu-control */
+window.background.csd > box.vertical > notebook > header.top tab,
+window.background.ssd > box.vertical > notebook > header.top tab,
+window.background.solid-csd > box.vertical > notebook > header.top tab,
+notebook.frame header.top tab {
+    border-radius: 4px 4px 0px 0px;
+}
+
+notebook.frame header.bottom tab {
+    border-radius: 0px 0px 4px 4px;
+}
+
+notebook header.top tab:checked,
+notebook header.top tab:checked:hover {
+    background-image: linear-gradient(to bottom,
+                                      shade(@theme_bg_color, 1.18),
+                                      shade(@theme_bg_color, 1.1));
+    border-radius: 4px 4px 0px 0px;
+    border-width: 0px 1px 0px 1px;
+    border-style: solid;
+    border-color: @borders;
+}
+
+notebook header.top tab:hover {
+    background-image: linear-gradient(to bottom,
+                                      alpha(@theme_base_color, 0.0),
+                                      alpha(@theme_base_color, 0.3));
+    border-radius: 4px 4px 0px 0px;
+    border-width: 0px 1px 0px 1px;
+    border-style: solid;
+    border-color: @borders;
+    box-shadow: none;
+}
+
+notebook header.bottom tab:checked,
+notebook header.bottom tab:checked:hover {
+    background-image: linear-gradient(to top,
+                                      shade(@theme_bg_color, 1.18),
+                                      shade(@theme_bg_color, 1.1));
+    border-radius: 0 0 4px 4px;
+    border-width: 0px 1px 0px 1px;
+    border-style: solid;
+    border-color: @borders;
+}
+
+notebook header.bottom tab:hover {
+    background-image: linear-gradient(to top,
+                                      alpha(@theme_base_color, 0.0),
+                                      alpha(@theme_base_color, 0.3));
+    border-radius: 0px;
+    border-width: 0px 1px 0px 1px;
+    border-style: solid;
+    border-color: @borders;
+}
+
+/* vertical tabs */
+
+notebook.frame header.left tab,
+notebook.frame header.right tab {
+    padding: 5px 20px;
+    margin: -1px 0px 0px 0px;
+    border-style: solid;
+    border-color: @borders;
+    border-width: 1px 0px 1px 0px;
+}
+
+notebook.frame header.left tab {
+    border-radius: 4px 0px 0px 4px;
+}
+
+notebook.frame header.right tab {
+    border-radius:  0px 4px 4px 0px;
+}
+
+notebook header.left tab:checked,
+notebook header.left tab:checked:hover {
+    background-image: linear-gradient(to right,
+                                      shade(@theme_bg_color, 1.18),
+                                      shade(@theme_bg_color, 1.1));
+    border-radius: 4px 0px 0px 4px;
+    border-width: 1px 0px 1px 0px;
+    border-color: @borders;
+}
+
+notebook header.left tab:hover {
+    background-image: linear-gradient(to right,
+                                      alpha(@theme_base_color, 0.0),
+                                      alpha(@theme_base_color, 0.3));
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: @borders;
+}
+
+notebook header.right tab:checked,
+notebook header.right tab:checked:hover {
+    background-image: linear-gradient(to left,
+                                      shade(@theme_bg_color, 1.18),
+                                      shade(@theme_bg_color, 1.1));
+    border-radius:  0px 4px 4px 0px;
+    border-width: 1px 0px 1px 0px;
+    border-color: @borders;
+}
+
+notebook header.right tab:hover {
+    background-image: linear-gradient(to left,
+                                      alpha(@theme_base_color, 0.0),
+                                      alpha(@theme_base_color, 0.3));
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: @borders;
+}
+
+notebook tab.reorderable-page:checked,
+notebook tab.reorderable-page:checked:hover {
+    background-image: linear-gradient(to bottom,
+                                      shade(@theme_bg_color, 1.18),
+                                      shade(@theme_bg_color, 1.1));
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    border-style: solid;
+}
+
+notebook tab.reorderable-page:hover {
+    background-image: linear-gradient(to bottom,
+                                      alpha(@theme_base_color, 0.0),
+                                      alpha(@theme_base_color, 0.3));
+    border-radius: 0;
+    box-shadow: inset 1px 0 alpha(@borders, 0.6), inset -1px 0 alpha(@borders, 0.6);
+    border-style: none;
+}
+
+/* close button styling */
+notebook button.flat,
+notebook button.flat.small-button {
+    border-image: none;
+    background-image: none;
+    background-color: transparent;
+    border-radius: 3px;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 1px;
+    padding: 1px;
+    -gtk-icon-shadow: none;
+}
+
+notebook .prelight-page button.flat.small-button,
+notebook .active-page button.flat.small-button {
+    color: mix(@theme_fg_color, @theme_base_color, 0.6);
+    -gtk-icon-shadow: 0 1px @button_text_shadow;
+}
+
+notebook button.flat:hover,
+notebook button.flat.small-button:hover {
+    color: @theme_fg_color;
+    border-color: transparent;
+    border-image: none;
+    background-image: none;
+    background-color: transparent;
+}
+
+notebook button.flat:checked,
+notebook button.flat:hover:checked,
+notebook button.flat.small-button:checked,
+notebook button.flat.small-button:hover:active {
+    color:  @button_active_text;
+    background-color: alpha(black, 0.08);
+    box-shadow: inset 0 1px alpha(black, 0.05);
+    -gtk-icon-shadow: 0 1px @button_active_text_shadow;
+    border-color: alpha(black, 0.27)
+                        alpha(black, 0.13)
+                        alpha(black, 0.13)
+                        alpha(black, 0.13);
+}
+
+notebook header.top tabs arrow.up,
+notebook header.bottom tabs arrow.up {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    color: @menu_controls_color;
+}
+
+notebook header.top tabs arrow.down,
+notebook header.bottom tabs arrow.down {
+    -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
+    color: @menu_controls_color;
+}
+
+notebook header.left tabs arrow.up,
+notebook header.right tabs arrow.up {
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+    color: @menu_controls_color;
+}
+
+notebook header.left tabs arrow.down,
+notebook header.right tabs arrow.down {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+    color: @menu_controls_color;
+}
+
+notebook header tabs arrow {
+    color: shade(@theme_fg_color, 2.6);
+}
+
+notebook header tabs arrow:hover {
+    color: @theme_selected_bg_color;
+}
+
+notebook header tabs arrow:active {
+    color: @theme_fg_color;
+}
+
+notebook header tabs arrow:disabled {
+    color: rgba(141, 144, 145, 0.3);
+}
+
+notebook header tabs arrow:backdrop {
+    color: rgba(84, 89, 90, 0.4);
+}
+
+notebook header tabs arrow:disabled {
+    color: #c7c7c7;
+}
+
 
 /**************
  * Scrollbars *
@@ -4163,6 +4366,10 @@ levelbar block {
     levelbar block.empty:backdrop {
       border-color: rgba(139, 142, 143, 0.15); }
 
+levelbar block.filled {
+  background-color: @selected_bg_color;
+}
+
 /****************
  * Print dialog *
 *****************/
@@ -5084,10 +5291,44 @@ button.circular {
   caret-color: @success_color; }
 
 stackswitcher button.text-button {
-  min-width: 100px; }
+  min-width: 100px;
+  min-height: 8px;
+  color: black;
+  background-color: shade(@selected_bg_color, 0.95);
+}
+
+
+stackswitcher button:checked {
+  color: white;
+}
 
 stackswitcher button.circular,
 stackswitcher button.text-button.circular {
   min-width: 32px;
-  min-height: 32px;
-  padding: 0; }
+  min-height: 8px;
+  padding: 0;
+ }
+
+
+stackswitcher  > button:dir(ltr).text-button.radio:first-child,
+stackswitcher  > button:dir(ltr).text-button.radio:hover:first-child,
+stackswitcher  > button:dir(ltr).text-button.radio:hover:active:first-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:first-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:hover:first-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:hover:active:first-child {
+    border-width: 1px 0px 1px 1px;
+    border-image-width: 3px 0 4px 3px;
+    border-radius: 8px 0px 0px 8px;
+}
+
+stackswitcher  > button:dir(ltr).text-button.radio:last-child,
+stackswitcher  > button:dir(ltr).text-button.radio:hover:last-child,
+stackswitcher  > button:dir(ltr).text-button.radio:hover:active:last-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:last-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:hover:last-child,
+stackswitcher  > button:dir(ltr).text-button.radio:checked:hover:active:last-child {
+    border-width: 1px 1px 1px 0px;
+    border-image-width: 3px 3px 4px 0;
+    border-radius: 0px 8px 8px 0px;
+
+}

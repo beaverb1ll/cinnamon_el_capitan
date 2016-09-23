@@ -73,8 +73,8 @@ StScrollBar StButton#vhandle:hover {
 
 /* Switches (to be used in menus) */
 .toggle-switch {
-	width: 51px;
-	height: 18px;
+	width: 36px;
+	height: 22px;
 }
 
 .toggle-switch-us,
@@ -2302,20 +2302,20 @@ StScrollBar StButton#vhandle:hover {
 .radiobutton StBin {
     width: 22px;
     height: 22px;
-    background-image: url("radiobutton-off.png");
+    background-image: url("radiobutton-off.svg");
     border-radius: 15px;
 }
 
 .radiobutton:focus StBin {
-    background-image: url("radiobutton-off.png");
+    background-image: url("radiobutton-off.svg");
 }
 
 .radiobutton:checked StBin {
-    background-image: url("radiobutton.png");
+    background-image: url("radiobutton.svg");
 }
 
 .radiobutton:focus:checked StBin {
-    background-image: url("radiobutton.png");
+    background-image: url("radiobutton.svg");
 }
 
 .radiobutton StLabel {
