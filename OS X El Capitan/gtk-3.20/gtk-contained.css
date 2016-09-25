@@ -115,7 +115,7 @@
 .view text,
 iconview text,
 textview text {
-  color: black;
+  color: @text_color;
   background-color: @theme_base_color; }
   .view:backdrop, iconview:backdrop,
   .view text:backdrop,
@@ -1262,7 +1262,7 @@ button {
     background-image: none; }
 .inline-toolbar
 button, .inline-toolbar
-button:backdrop {
+button:backdrop { 
   border-radius: 0;
   border-width: 1px; }
 .primary-toolbar
@@ -1793,9 +1793,17 @@ treeview spinbutton:not(.vertical) {
 combobox arrow {
   -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
   min-height: 16px;
-  min-width: 16px; }
+  min-width: 16px; 
+}
 combobox:drop(active) {
-  box-shadow: none; }
+  box-shadow: none; 
+}
+combobox box entry:focus {
+ background-color: #6c6c6c;
+}
+combobox box entry {
+ background-color: #3C3C3C;
+}
 
 /************
  * Toolbars *
@@ -2227,7 +2235,7 @@ window.csd > .titlebar:not(headerbar) {
 }
 
 
-.titlebar .titlebutton.maximize:hover,
+.titlebar .titlebutton.maximize:hover, 
 .titlebar .titlebutton.maximize:active,
 .titlebar .titlebutton.maximize:checked  {
     color: transparent;
@@ -4962,6 +4970,7 @@ infobar {
  * Tooltips *
  ************/
 tooltip {
+  
   padding: 4px 0;
   /* not working */
   border-radius: 0;
@@ -5137,7 +5146,7 @@ decoration {
 /* Server-side decoration (SSD) */
 .window-frame.ssd {
     border-radius: 6px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.18); 
 }
 
 .window-frame.ssd,
@@ -5293,13 +5302,13 @@ button.circular {
 stackswitcher button.text-button {
   min-width: 100px;
   min-height: 8px;
-  color: black;
+  color: @theme_fg_color;
   background-color: shade(@selected_bg_color, 0.95);
 }
 
 
 stackswitcher button:checked {
-  color: white;
+  color: @selected_fg_color;
 }
 
 stackswitcher button.circular,
@@ -5307,7 +5316,7 @@ stackswitcher button.text-button.circular {
   min-width: 32px;
   min-height: 8px;
   padding: 0;
- }
+ }	
 
 
 stackswitcher  > button:dir(ltr).text-button.radio:first-child,
@@ -5331,4 +5340,13 @@ stackswitcher  > button:dir(ltr).text-button.radio:checked:hover:active:last-chi
     border-image-width: 3px 3px 4px 0;
     border-radius: 0px 8px 8px 0px;
 
+}
+
+
+entry:focus {
+ background-color: #6c6c6c;
+}
+
+entry {
+ background-color: #3C3C3C;
 }

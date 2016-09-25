@@ -4,7 +4,7 @@
 @define-color bg_color #3C3C3C;
 @define-color fg_color #F9F9F9;
 @define-color base_color #3C3C3C;
-@define-color text_color #4c4c4c;
+@define-color text_color #F9F9F9;
 /*@define-color selected_bg_color #066DC1;*/
 @define-color selected_bg_color #3f9bfd;
 @define-color selected_fg_color #ffffff;
@@ -14,8 +14,8 @@
 @define-color theme_dark_bg_color #e4e4e4;
 @define-color progressbar_color #4c4c4c;
 
-@define-color titlebar_bg_color #cecece;
-@define-color titlebar_fg_color #4c4c4c;
+@define-color titlebar_bg_color #4c4c4c;
+@define-color titlebar_fg_color #cecece;
 @define-color sidebar_bg_color @titlebar_bg_color;
 
 @define-color outline_color #f5f5f5;
@@ -39,28 +39,28 @@ text/foreground color of selections */
 @define-color theme_selected_fg_color @selected_fg_color;
 /*
 base background color of insensitive widgets */
-@define-color insensitive_bg_color #fcfcfc;
+@define-color insensitive_bg_color black;
 /*
 text foreground color of insensitive widgets */
 @define-color insensitive_fg_color #6c6c6c;
 /*
 insensitive text widgets and the like base background color */
-@define-color insensitive_base_color #ffffff;
+@define-color insensitive_base_color black;
 /*
 widget text/foreground color on backdrop windows */
-@define-color theme_unfocused_fg_color #6c6c6c;
+@define-color theme_unfocused_fg_color #F9F9F9;
 /*
 text color for entries, views and content in general on backdrop windows */
-@define-color theme_unfocused_text_color white;
+@define-color theme_unfocused_text_color #F9F9F9;
 /*
 widget base background color on backdrop windows */
-@define-color theme_unfocused_bg_color #f5f5f5;
+@define-color theme_unfocused_bg_color #6c6c6c;
 /*
 text widgets and the like base background color on backdrop windows */
-@define-color theme_unfocused_base_color #fefefe;
+@define-color theme_unfocused_base_color #6c6c6c;
 /*
 base background color of selections on backdrop windows */
-@define-color theme_unfocused_selected_bg_color #c8c8c8;
+@define-color theme_unfocused_selected_bg_color black;
 /*
 text/foreground color of selections on backdrop windows */
 @define-color theme_unfocused_selected_fg_color #000000;
